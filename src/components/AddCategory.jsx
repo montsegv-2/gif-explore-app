@@ -1,8 +1,8 @@
 import { useState } from "react"
 
-export const AddCategory = ({setCategories}) => {
+export const AddCategory = ({ onNewCategory }) => {
 
-  const [InputValue, setInputValue] = useState('One punch');
+  const [inputValue, setInputValue] = useState('');
 
   const onInputChange = ( { target } ) => {
     setInputValue( target.value );
@@ -10,10 +10,12 @@ export const AddCategory = ({setCategories}) => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    if( InputValue.trim().length <= 1) return;
+    if( inputValue.trim().length <= 1) return;
+    // const newInputValue
     
-    setCategories(categories => [InputValue, ...categories]);
-    setInputValue('')
+    // setCategories(categories => [InputValue, ...categories]);
+    setInputValue('');
+    onNewCategory(inputValue.trim());
   }
 
   return (
@@ -21,7 +23,7 @@ export const AddCategory = ({setCategories}) => {
       <input
           type="text"
           placeholder="search gifs"
-          value={ InputValue }
+          value={ inputValue }
           onChange={ onInputChange }
       />
     </form>
